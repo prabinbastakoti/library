@@ -1,35 +1,106 @@
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function() {
-        const information = `${title} by ${author}, ${pages} pages, ${read}`;
-        return information; 
+
+const removeIcon = "<img src=\"\static/images/delete.png\">";
+const yes = "<img src=\"\static/images/ok.png\">";
+const no = "<img src=\"\static/images/no.png\">";
+
+
+let myLibrary = [];
+
+
+const tableContainer = document.querySelector('.tableContainer');
+
+const submit = document.querySelector('button[type="submit"]');
+
+
+submit.addEventListener("click", (event) => {
+
+    let isValidForm = document.querySelector("form").checkValidity();
+    if (!isValidForm) {
+        isValidForm.reportValidity();
     }
+    else {
+        event.preventDefault();
+
+        const BookTitle = document.querySelector('input[name="title"]');
+        const BookAuthor = document.querySelector('input[name="author"]');
+        const NoPages = document.querySelector('input[name="pages"]');
+        const Readstatus = document.querySelector('#status');
+
+        Book(BookTitle, BookAuthor, NoPages, Readstatus);
+        //close popup after submission
+        document.querySelector(".popup").classList.remove("active");
+        // Clear form after submission
+        document.querySelector("form").reset();
+    }
+
+});
+
+
+
+function Book(BookTitle, BookAuthor, NoPages, Readstatus) {
+    const object = {
+        title: BookTitle.value,
+        author: BookAuthor.value,
+        pages: NoPages.value,
+        status: Readstatus.value
+    }
+    //update array
+    myLibrary.push(object);
+
+    addBookToLibrary(object);
 }
 
-const theAlchemist = new Book("The Alchemist" , "Paulo Coelho", 183, "done reading");
-const thinketh = new Book("As a man thinketh", "James Allen" , 95, "not read yet");
-const nineTeenEightyFour = new Book("1984", "George Orwell" , 331, "not read yet");
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien" , 295, "not read yet");
+function addBookToLibrary(object) {
+    // do stuff here
 
-console.log(theHobbit.info());
+    const tableRow = document.createElement("tr");
 
+    Object.keys(object).forEach(key => {
+        const tableData = document.createElement("td");
 
+        // if the input is selection field
+        if (key == 'status') {
+            if(object[key] == 'yes') {
+                // if the selection is positive , show tick icon
+                tableData.innerHTML = yes;
 
+                //add table cell to the row
+                tableRow.appendChild(tableData);
+            }
+            else {
+                //if the selection is negative , show cross icon
+                tableData.innerHTML = no;
+                tableRow.appendChild(tableData);
+            }
+        }
+        // if the input is text field or number field. All fields that is not selection field
+        else {
+            tableData.innerText = object[key];
+            tableRow.appendChild(tableData);
+        }
+    })
+    // add remove button 
+    const tableData = document.createElement("td");
+    tableData.innerHTML = removeIcon;
+    tableRow.appendChild(tableData);
 
+    // add table row to the table 
+    tableContainer.appendChild(tableRow);
 
+}
 
-
-
-
-
-document.querySelector(".showAdd").addEventListener("click" ,function() {
+// popup form on click 
+document.querySelector(".showAdd").addEventListener("click", function () {
     document.querySelector(".popup").classList.add("active");
 });
 
-document.querySelector(".popup .close-btn").addEventListener("click" ,function() {
+
+// close form on click
+document.querySelector(".popup .close-btn").addEventListener("click", function () {
     document.querySelector(".popup").classList.remove("active");
 });
+
+
+
+
