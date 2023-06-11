@@ -14,6 +14,8 @@ body {
     justify-content: space-between;
 }
 
+
+
 .libraryLogo {
     display: flex;
     align-items: center;
@@ -124,5 +126,6 @@ footer img {
 }
 
 footer img:hover {
-    transform:  scale(1.3) rotate(360deg);
+    filter: brightness(1.2);
+    transform:  scale(1.15) rotate(360deg);
 }
