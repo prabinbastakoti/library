@@ -49,6 +49,13 @@ main table {
 table img {
     width: 25px;
     height: 25px;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+
+table img:hover {
+    filter: brightness(1.2);
+    transform: scale(1.10);
 }
 
 th , td  {
