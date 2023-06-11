@@ -59,7 +59,7 @@ table img {
 
 table img:hover {
     filter: brightness(1.2);
-    transform: scale(1.10);
+    transform: scale(1.05);
 }
 
 th,
@@ -151,7 +151,7 @@ footer img:hover {
     width: 450px;
     height: 450px;
     border-radius: 8px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     padding: 10px 20px;
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms,
