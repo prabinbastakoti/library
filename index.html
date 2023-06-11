@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="static/style.css">
+    <link rel="shortcut icon" href="static/images/library.png" type="image/x-icon">
     <title>Library</title>
 </head>
+
 <body>
-    Hello 
+    <header>
+        <div class="libraryLogo"><img src="static/images/library.png">
+            <h1>Library</h1>
+        </div>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Status</th>
+                <th>Remove</th>
+            </tr>
+
+            <tr>
+                <td>The Alchemist</td>
+                <td>Paulo Coehlo</td>
+                <td>312</td>
+                <td><img src="static/images/ok.png"></td>
+                <td><img src="static/images/delete.png"></td>
+            </tr>
+
+            <tr>
+                <td>The Alchemist</td>
+                <td>Paulo Coehlo</td>
+                <td>312</td>
+                <td><img src="static/images/no.png"></td>
+                <td><img src="static/images/delete.png"></td>
+            </tr>
+        </table>
+
+        <button type="button"><img src="static/images/plus.png">Add New Book</button>
+    </main>
+    <footer>COPYRIGHT &copy; 2023. ALL RIGHTS RESERVED
+        <a href="https://github.com/prabinbastakoti"><img src="static/images/github.png"></a>
+    </footer>
 </body>
+
 </html>
