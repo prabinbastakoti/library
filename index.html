@@ -42,10 +42,38 @@
                 <td><img src="static/images/no.png"></td>
                 <td><img src="static/images/delete.png"></td>
             </tr>
-            
+
         </table>
 
-        <button type="button"><img src="static/images/plus.png">Add New Book</button>
+        <button type="button" class="showAdd"><img src="static/images/plus.png">Add New Book</button>
+
+        <div class="popup">
+            <div class="close-btn">&times;</div>
+            <form action="">
+
+                <div class="title form-element">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div class="author form-element">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                </div>
+                <div class="pages form-element">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages">
+                </div>
+                <div class="read-status form-element">
+                    <label for="status">Status</label>
+                    <select name="status" id="status">
+                        <option value="" selected disabled></option>
+                        <option value="yes">Completed</option>
+                        <option value="no">Not Read Yet</option>
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </main>
     <footer>COPYRIGHT &copy; 2023. ALL RIGHTS RESERVED
         <a href="https://github.com/prabinbastakoti"><img src="static/images/github.png"></a>

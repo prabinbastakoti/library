@@ -16,3 +16,20 @@ const nineTeenEightyFour = new Book("1984", "George Orwell" , 331, "not read yet
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien" , 295, "not read yet");
 
 console.log(theHobbit.info());
+
+
+
+
+
+
+
+
+
+
+document.querySelector(".showAdd").addEventListener("click" ,function() {
+    document.querySelector(".popup").classList.add("active");
+});
+
+document.querySelector(".popup .close-btn").addEventListener("click" ,function() {
+    document.querySelector(".popup").classList.remove("active");
+});

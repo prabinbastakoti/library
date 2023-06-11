@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +22,8 @@ body {
     align-items: center;
     gap: 15px;
 }
-.libraryLogo img{
+
+.libraryLogo img {
     width: 40px;
     height: 40px;
 }
@@ -60,7 +62,8 @@ table img:hover {
     transform: scale(1.10);
 }
 
-th , td  {
+th,
+td {
     border: 1px solid rgba(190, 190, 190);
     padding: 10px 20px;
 }
@@ -127,5 +130,124 @@ footer img {
 
 footer img:hover {
     filter: brightness(1.2);
-    transform:  scale(1.15) rotate(360deg);
+    transform: scale(1.15) rotate(360deg);
 }
+
+
+
+
+/* ==============================Add Item Popup============================================= */
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    background-color: white;
+    width: 450px;
+    height: 450px;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 10px 20px;
+    transition: top 0ms ease-in-out 200ms
+                opacity 200ms ease-in-out 0ms
+                transform 20ms ease-in-out 0ms;
+}
+
+
+.popup.active {
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: top 0ms ease-in-out 0ms
+                opacity 200ms ease-in-out 0ms
+                transform 20ms ease-in-out 0ms;
+}
+
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.805);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.close-btn {
+    align-self: flex-end;
+    text-align: center;
+    padding: 1px 8px;
+    border: 1px solid rgba(255, 0, 0, 0.7);
+    border-radius: 50%;
+    background-color: rgba(255, 0, 0, 0.7);
+    transition: ease-in-out .2s;
+    cursor: pointer;
+    color: white;
+}
+
+.close-btn:hover {
+    filter: brightness(1.3);
+    border: 1px solid red;
+
+    background-color: red;
+    
+}
+
+input {
+    width: 350px;
+    height: 35px;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: 1px solid #c1c1c2;
+}
+
+select {
+    width: 350px;
+    height: 35px;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: 1px solid #c1c1c2;
+    background-color: white;
+}
+
+button[type="submit"] {
+     padding: 16px 80px;
+     margin-bottom: 20px;
+     outline: none;
+     border: none;
+     background-color: #596D48;
+     color: white;
+     transition: .4s;
+     cursor: pointer;
+     font-size: 1rem;
+     font-weight: bold;
+     align-self: center;
+     margin-top: 15px;
+}
+
+
+button[type="submit"]:hover {
+    filter: brightness(1.2);
+    transform: translateY(-0.3em);
+}
+
+
+/* =================================================================================================================== */
