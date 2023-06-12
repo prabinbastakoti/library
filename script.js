@@ -1,7 +1,7 @@
 
 const removeIcon = "<img src=\"\static/images/delete.png\" id=\"delete\">";
-const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\">";
-const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\">";
+const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" name=\"yes\">";
+const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\" name=\"no\">";
 
 let myLibrary = [];
 
@@ -66,8 +66,6 @@ function Book(title, author, pages, status, removeIcon) {
 
     myLibrary.push(obj);
 
-    console.log(myLibrary);
-
     addBookToLibrary(obj);
 
 }
@@ -76,6 +74,7 @@ function Book(title, author, pages, status, removeIcon) {
 function addBookToLibrary(currentObj) {
 
     const row = tableContainer.insertRow(i);
+
     let indexCell = 0;
 
     Object.keys(currentObj).forEach(key => {
@@ -105,28 +104,49 @@ function addBookToLibrary(currentObj) {
 
 document.addEventListener("click", (e) => {
 
+
+    // Delete Row if remove button is clicked
+
     if (e.target == document.querySelector("img#delete")) {
 
         const deleteRow = e.target.parentElement.parentElement.rowIndex;
-        
+
         e.target.parentElement.parentElement.remove();
 
-        myLibrary.splice(deleteRow-1 , 1);
-        // e.target.parentElement.parentElement.remove();
+        myLibrary.splice(deleteRow - 1, 1);
 
-        // const tableRow = e.target.parentElement.parentElement;
+    }
 
-        // console.log(tableRow);
-        // console.log(typeof (tableRow));
+    // change status from completed to not read yet and vice versa
 
-        // const del = e.target;
+    if (e.target == document.querySelector("img#changeStatus")) {
 
-        // console.log(del.parentElement.rowIndex);
-        // console.log(del.cellIndex);
-        // console.log(e.target);
+        // change status from completed to not read yet
+
+        if (e.target.name == 'yes') {
+
+            const rIndex = e.target.parentElement.parentElement.rowIndex;
+
+            const cIndex = e.target.parentElement.cellIndex;
+
+            myLibrary[rIndex - 1].status = "no";
+
+            tableContainer.rows[rIndex - 1].cells[cIndex].innerHTML = no;
+
+        }
+
+        //change status from not read yet to completed 
+
+        else {
+
+            const rIndex = e.target.parentElement.parentElement.rowIndex;
+
+            const cIndex = e.target.parentElement.cellIndex;
+
+            myLibrary[rIndex - 1].status = "yes";
+
+            tableContainer.rows[rIndex - 1].cells[cIndex].innerHTML = yes;
+        }
 
     }
 })
-
-
-
