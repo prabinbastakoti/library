@@ -1,9 +1,11 @@
 
 const removeIcon = "<img src=\"\static/images/delete.png\" id=\"delete\">";
-const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" name=\"yes\">";
-const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\" name=\"no\">";
+const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok\">";
+const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no\">";
 
-let myLibrary = [];
+let myLibrary = [{ title: "The Alchemist", author: "Paulo Coehlo", pages: "312", status: "yes", removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">" },
+                    { title: "As a man Thinketh", author: "James Allen", pages: "112", status: "no", removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">"},
+                    {title: "1984", author: "George Orwell", pages: "432", status: "yes" , removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">"}];
 
 const tableContainer = document.querySelector('.tableContainer tbody');
 const submit = document.querySelector('button[type="submit"]');
@@ -13,7 +15,7 @@ const BookAuthor = document.querySelector('input[name="author"]');
 const NoPages = document.querySelector('input[name="pages"]');
 const Readstatus = document.querySelector('select#status');
 
-let i = 0;
+let i = 3;
 
 // popup form on click 
 document.querySelector(".showAdd").addEventListener("click", function () {
@@ -100,4 +102,56 @@ function addBookToLibrary(currentObj) {
     i++;
 
 }
+
+let deleteElement = document.querySelectorAll('img#delete');
+
+
+deleteElement.forEach((item) => {
+    item.addEventListener('click', () => {
+        const index = item.parentElement.parentElement.rowIndex;
+        item.parentElement.parentElement.remove();
+        myLibrary.splice(index - 1 , 1);
+        i--;
+    })
+});
+
+
+
+
+
+document.addEventListener("click", (e) => {
+    if(e.target.classList.contains("ok")) {
+        e.target.parentElement.innerHTML = no;
+
+    }
+    else if(e.target.classList.contains("no")) {
+        e.target.parentElement.innerHTML = yes;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
