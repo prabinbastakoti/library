@@ -79,8 +79,22 @@ function addBookToLibrary(currentObj) {
     let indexCell = 0; 
 
     Object.keys(currentObj).forEach(key => {
+
         let cell = row.insertCell(indexCell);
-        cell.innerHTML = currentObj[key];
+
+        if (key == 'status') {
+            if (currentObj[key] == 'yes') {
+                cell.innerHTML = yes;
+            }
+            else {
+                cell.innerHTML = no;
+            }
+        }
+
+        else {
+            cell.innerHTML = currentObj[key];
+        }
+
         indexCell++;
     });
 
