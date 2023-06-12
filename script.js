@@ -116,16 +116,30 @@ deleteElement.forEach((item) => {
 });
 
 
-
-
-
 document.addEventListener("click", (e) => {
+
     if(e.target.classList.contains("ok")) {
-        e.target.parentElement.innerHTML = no;
+
+        let element = e.target;
+        element.src = "static/images/no.png";
+        element.classList.remove("ok");
+        element.classList.add("no");
+
+        let rIndex = element.parentElement.parentElement.rowIndex;
+
+        myLibrary[rIndex - 1].status = "no";
 
     }
     else if(e.target.classList.contains("no")) {
-        e.target.parentElement.innerHTML = yes;
+
+        let element = e.target;
+        element.src = "static/images/ok.png";
+        element.classList.remove("no");
+        element.classList.add("ok");
+
+        let rIndex = element.parentElement.parentElement.rowIndex;
+
+        myLibrary[rIndex - 1].status = "yes";
     }
 });
 
