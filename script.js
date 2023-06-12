@@ -1,11 +1,9 @@
 
-const removeIcon = "<img src=\"\static/images/delete.png\" id=\"delete\">";
+const removeIcon = "<img src=\"\static/images/delete.png\" id=\"delete\" class=\"delete\">";
 const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok\">";
 const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no\">";
 
-let myLibrary = [{ title: "The Alchemist", author: "Paulo Coehlo", pages: "312", status: "yes", removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">" },
-                    { title: "As a man Thinketh", author: "James Allen", pages: "112", status: "no", removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">"},
-                    {title: "1984", author: "George Orwell", pages: "432", status: "yes" , removeIcon: "<img src=\"static/images/delete.png\" id=\"delete\">"}];
+let myLibrary = [];
 
 const tableContainer = document.querySelector('.tableContainer tbody');
 const submit = document.querySelector('button[type="submit"]');
@@ -15,7 +13,7 @@ const BookAuthor = document.querySelector('input[name="author"]');
 const NoPages = document.querySelector('input[name="pages"]');
 const Readstatus = document.querySelector('select#status');
 
-let i = 3;
+let i = 0;
 
 // popup form on click 
 document.querySelector(".showAdd").addEventListener("click", function () {
@@ -103,18 +101,6 @@ function addBookToLibrary(currentObj) {
 
 }
 
-let deleteElement = document.querySelectorAll('img#delete');
-
-
-deleteElement.forEach((item) => {
-    item.addEventListener('click', () => {
-        const index = item.parentElement.parentElement.rowIndex;
-        item.parentElement.parentElement.remove();
-        myLibrary.splice(index - 1 , 1);
-        i--;
-    })
-});
-
 
 document.addEventListener("click", (e) => {
 
@@ -141,6 +127,16 @@ document.addEventListener("click", (e) => {
 
         myLibrary[rIndex - 1].status = "yes";
     }
+
+    else if (e.target.classList.contains("delete")) {
+        let element = e.target;
+        let rIndex = element.parentElement.parentElement.rowIndex;
+        element.parentElement.parentElement.remove();
+
+        myLibrary.splice(rIndex - 1, 1);
+        i--;
+    }
+
 });
 
 
