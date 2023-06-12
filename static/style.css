@@ -84,6 +84,9 @@ tr:nth-child(odd) td {
     background-color: rgb(245, 245, 245);
 }
 
+tr {
+    transition: ease-in-out 200ms;
+}
 
 button {
     display: flex;
