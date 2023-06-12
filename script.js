@@ -76,7 +76,7 @@ function Book(title, author, pages, status, removeIcon) {
 function addBookToLibrary(currentObj) {
 
     const row = tableContainer.insertRow(i);
-    let indexCell = 0; 
+    let indexCell = 0;
 
     Object.keys(currentObj).forEach(key => {
 
@@ -104,9 +104,29 @@ function addBookToLibrary(currentObj) {
 
 
 document.addEventListener("click", (e) => {
-    const del = e.target;
-    
-    console.log(del.parentElement.rowIndex);
-    console.log(del.cellIndex);
-    console.log(e.target);
+
+    if (e.target == document.querySelector("img#delete")) {
+
+        const deleteRow = e.target.parentElement.parentElement.rowIndex;
+        
+        e.target.parentElement.parentElement.remove();
+
+        myLibrary.splice(deleteRow-1 , 1);
+        // e.target.parentElement.parentElement.remove();
+
+        // const tableRow = e.target.parentElement.parentElement;
+
+        // console.log(tableRow);
+        // console.log(typeof (tableRow));
+
+        // const del = e.target;
+
+        // console.log(del.parentElement.rowIndex);
+        // console.log(del.cellIndex);
+        // console.log(e.target);
+
+    }
 })
+
+
+
