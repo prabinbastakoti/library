@@ -1,8 +1,8 @@
 
 
 const removeIcon = "<img src=\"\static/images/delete.png\">";
-const yes = "<img src=\"\static/images/ok.png\">";
-const no = "<img src=\"\static/images/no.png\">";
+const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\">";
+const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\">";
 
 
 let myLibrary = [];
@@ -11,7 +11,6 @@ let myLibrary = [];
 const tableContainer = document.querySelector('.tableContainer');
 
 const submit = document.querySelector('button[type="submit"]');
-
 
 submit.addEventListener("click", (event) => {
 
@@ -64,7 +63,6 @@ function addBookToLibrary(object) {
             if(object[key] == 'yes') {
                 // if the selection is positive , show tick icon
                 tableData.innerHTML = yes;
-
                 //add table cell to the row
                 tableRow.appendChild(tableData);
             }
@@ -100,6 +98,18 @@ document.querySelector(".showAdd").addEventListener("click", function () {
 document.querySelector(".popup .close-btn").addEventListener("click", function () {
     document.querySelector(".popup").classList.remove("active");
 });
+
+
+
+
+
+
+document.addEventListener("click", (e) => {
+    console.log(e.target);
+    if (e.target == document.querySelector("img#changeStatus")) {
+        console.log("Found");
+    }
+})
 
 
 
