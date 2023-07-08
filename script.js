@@ -118,15 +118,6 @@ const submitAddNewBookForm = (event) => {
 
 }
 
-const changeStatus = (classList) => {
-    if (classList.contains("ok")) {
-        return "no";
-    }
-    else {
-        return "yes";
-    }
-}
-
 const addBookButton = document.querySelector(".showAdd");
 const close_btn = document.querySelector(".close-btn");
 const submit = document.querySelector('button[type="submit"]');
@@ -137,6 +128,16 @@ close_btn.addEventListener('click', closeAddNewBookForm);
 submit.addEventListener('click', submitAddNewBookForm);
 
 
+
+const changeStatus = (classList) => {
+    if (classList.contains("ok")) {
+        return "no";
+    }
+    else {
+        return "yes";
+    }
+}
+
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains("sign")) {
         const rIndex = e.target.parentElement.parentElement.rowIndex;
@@ -145,7 +146,7 @@ document.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains("delete")) {
         const rIndex = e.target.parentElement.parentElement.rowIndex;
-        myLibrary.splice(rIndex-1 , 1);
+        myLibrary.splice(rIndex - 1, 1);
         addBookToLibrary();
     }
 })
