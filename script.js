@@ -1,167 +1,128 @@
 
-const removeIcon = "<img src=\"\static/images/delete.png\" id=\"delete\" class=\"delete\">";
-const yes = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok\">";
-const no = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no\">";
-
 let myLibrary = [];
 
-const tableContainer = document.querySelector('.tableContainer tbody');
-const submit = document.querySelector('button[type="submit"]');
 
-const BookTitle = document.querySelector('input[name="title"]');
-const BookAuthor = document.querySelector('input[name="author"]');
-const NoPages = document.querySelector('input[name="pages"]');
-const Readstatus = document.querySelector('select#status');
+class Book {
 
-let i = 0;
+    constructor(title, author, pages, status) {
 
-// popup form on click 
-document.querySelector(".showAdd").addEventListener("click", function () {
-    document.querySelector(".popup").classList.add("active");
-});
-
-// close form on click
-document.querySelector(".popup .close-btn").addEventListener("click", function () {
-    document.querySelector(".popup").classList.remove("active");
-});
-
-
-// when Submit Button is clicked
-submit.addEventListener("click", (event) => {
-
-    let isValidForm = document.querySelector("form").checkValidity();
-    if (!isValidForm) {
-        isValidForm.reportValidity();
+        this.title = title,
+            this.author = author,
+            this.pages = pages,
+            this.status = status
     }
-    else {
-        //If form is valid , prevent default action of submit button
-        event.preventDefault();
-
-        const title = BookTitle.value;
-        const author = BookAuthor.value;
-        const pages = NoPages.value;
-        const status = Readstatus.value;
-
-
-        Book(title, author, pages, status, removeIcon);
-
-        //close popup after submission
-        document.querySelector(".popup").classList.remove("active");
-        // Clear form after submission
-        document.querySelector("form").reset();
-    }
-
-});
-
-
-function Book(title, author, pages, status, removeIcon) {
-
-    const obj = {
-        title: title,
-        author: author,
-        pages: pages,
-        status: status,
-        removeIcon: removeIcon
-    }
-
-    myLibrary.push(obj);
-
-    addBookToLibrary(obj);
 
 }
 
 
-function addBookToLibrary(currentObj) {
+const addBookToLibrary = () => {
 
-    const row = tableContainer.insertRow(i);
+    const table = document.querySelector('.tableContainer');
+    // Clear the table Every time there is a new update to myLibrary // Start Fresh Rendering
+    resetTable(table);
 
-    let indexCell = 0;
+    const tbody = document.createElement("tbody");
 
-    Object.keys(currentObj).forEach(key => {
+    for (let i = 0; i < myLibrary.length; i++) {
 
-        let cell = row.insertCell(indexCell);
+        const row = tbody.insertRow(i);
 
-        if (key == 'status') {
-            if (currentObj[key] == 'yes') {
-                cell.innerHTML = yes;
+        let indexCell = 0
+
+        Object.keys(myLibrary[i]).forEach(key => {
+            let cell = row.insertCell(indexCell);
+
+            if (key == 'status') {
+                if (myLibrary[i][key] == 'yes') {
+                    cell.innerHTML = yesIcon();
+                }
+                else {
+                    cell.innerHTML = noIcon();
+                }
             }
             else {
-                cell.innerHTML = no;
+                cell.innerHTML = myLibrary[i][key];
             }
-        }
+            indexCell++;
+        })
 
-        else {
-            cell.innerHTML = currentObj[key];
-        }
+        let deleteCell = row.insertCell(4);
+        
+        deleteCell.innerHTML = deleteIcon();
 
-        indexCell++;
-    });
 
-    i++;
+    }
+
+    table.appendChild(tbody);
+
 
 }
 
+const deleteIcon = () => {
+    const icon = "<img src=\"\static/images/delete.png\" id=\"delete\" class=\"delete\">";
+    return icon;
+}
 
-document.addEventListener("click", (e) => {
+const yesIcon = () => {
+    const icon = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok\">";
+    return icon;
+}
 
-    if(e.target.classList.contains("ok")) {
 
-        let element = e.target;
-        element.src = "static/images/no.png";
-        element.classList.remove("ok");
-        element.classList.add("no");
+const noIcon = () => {
+    const icon = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no\">";
+    return icon;
+}
 
-        let rIndex = element.parentElement.parentElement.rowIndex;
 
-        myLibrary[rIndex - 1].status = "no";
 
+const resetTable = (table) => {
+    table.removeChild(table.lastElementChild);
+}
+
+
+const addNewBookForm = document.querySelector(".popup");
+const form = document.querySelector("form");
+
+
+const openAddNewBookForm = () => {
+    form.reset();
+    addNewBookForm.classList.add("active");
+}
+
+const closeAddNewBookForm = () => {
+    addNewBookForm.classList.remove("active");
+}
+
+const getInputInformation = () => {
+    const title = document.querySelector('input[id="title"]').value;
+    const author = document.querySelector('input[id="author"]').value;
+    const pages = document.querySelector('input[id="pages"]').value;
+    const status = document.querySelector('select[id="status"]').value;
+
+    return new Book(title, author, pages, status);
+}
+
+const submitAddNewBookForm = (event) => {
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
     }
-    else if(e.target.classList.contains("no")) {
-
-        let element = e.target;
-        element.src = "static/images/ok.png";
-        element.classList.remove("no");
-        element.classList.add("ok");
-
-        let rIndex = element.parentElement.parentElement.rowIndex;
-
-        myLibrary[rIndex - 1].status = "yes";
+    else {
+        event.preventDefault();
+        const newBook = getInputInformation();
+        myLibrary.push(newBook);
+        addBookToLibrary();
+        closeAddNewBookForm();
     }
 
-    else if (e.target.classList.contains("delete")) {
-        let element = e.target;
-        let rIndex = element.parentElement.parentElement.rowIndex;
-        element.parentElement.parentElement.remove();
+}
 
-        myLibrary.splice(rIndex - 1, 1);
-        i--;
-    }
-
-});
+const addBookButton = document.querySelector(".showAdd");
+const close_btn = document.querySelector(".close-btn");
+const submit = document.querySelector('button[type="submit"]');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+addBookButton.addEventListener('click', openAddNewBookForm);
+close_btn.addEventListener('click', closeAddNewBookForm);
+submit.addEventListener('click', submitAddNewBookForm);
