@@ -47,7 +47,7 @@ const addBookToLibrary = () => {
         })
 
         let deleteCell = row.insertCell(4);
-        
+
         deleteCell.innerHTML = deleteIcon();
 
 
@@ -55,7 +55,7 @@ const addBookToLibrary = () => {
 
     table.appendChild(tbody);
 
-
+    console.log(myLibrary);
 }
 
 const deleteIcon = () => {
@@ -64,13 +64,13 @@ const deleteIcon = () => {
 }
 
 const yesIcon = () => {
-    const icon = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok\">";
+    const icon = "<img src=\"\static/images/ok.png\" id=\"changeStatus\" class=\"ok sign\">";
     return icon;
 }
 
 
 const noIcon = () => {
-    const icon = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no\">";
+    const icon = "<img src=\"\static/images/no.png\" id=\"changeStatus\" class=\"no sign\">";
     return icon;
 }
 
@@ -118,6 +118,15 @@ const submitAddNewBookForm = (event) => {
 
 }
 
+const changeStatus = (classList) => {
+    if (classList.contains("ok")) {
+        return "no";
+    }
+    else {
+        return "yes";
+    }
+}
+
 const addBookButton = document.querySelector(".showAdd");
 const close_btn = document.querySelector(".close-btn");
 const submit = document.querySelector('button[type="submit"]');
@@ -126,3 +135,17 @@ const submit = document.querySelector('button[type="submit"]');
 addBookButton.addEventListener('click', openAddNewBookForm);
 close_btn.addEventListener('click', closeAddNewBookForm);
 submit.addEventListener('click', submitAddNewBookForm);
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains("sign")) {
+        const rIndex = e.target.parentElement.parentElement.rowIndex;
+        myLibrary[rIndex - 1].status = changeStatus(e.target.classList);
+        addBookToLibrary();
+    }
+    if (e.target.classList.contains("delete")) {
+        const rIndex = e.target.parentElement.parentElement.rowIndex;
+        myLibrary.splice(rIndex-1 , 1);
+        addBookToLibrary();
+    }
+})
